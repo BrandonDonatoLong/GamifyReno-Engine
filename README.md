@@ -19,14 +19,14 @@ I am thinking a RESTFUL API
         list of objective objects
     }
 
-### Post Accomplishment
+### Post: Accomplishment
     {
         ObjectiveID: number
         UserID: String
         Proof: Object
     }
 
-### Get Accomplishment
+### Get: Accomplishment
     {
         AccomplishmentID: Number
         ObjectiveID: Number
@@ -34,7 +34,7 @@ I am thinking a RESTFUL API
         Rating: Number
     }
 
-### Post RateAccomplishment
+###Post: RateAccomplishment
     {
         AccomplishmentID: Number
         Rating: 1-5
@@ -47,4 +47,19 @@ I am thinking a RESTFUL API
         TeamID: String,
         Password: String,
         Accomplishments: [list of accomplishments by user for user profile]
+    }
+    
+###Team
+
+####Post CreateTeam
+    {
+        TeamName: TeamName,
+        TeamCreator: UserID,
+        TeamMoto: String,
+        OpenToCreate: True | False
+    }
+    
+####Get Teams
+    {
+        Team
     }
