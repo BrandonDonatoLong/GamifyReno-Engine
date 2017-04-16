@@ -159,6 +159,31 @@ router.post('/Rating', function (req, res) {
     res.json({})
 })
 
+router.get('/Accomplishments', function (req, res) {
+    res.json(AccompList.list);
+});
+
+router.get('/AccomplishmentByUser', function (req, res) {
+    var userID = req.query.userID;
+    AccompList.findAccompByUser(userID, function(err, result){
+        if (err){
+            return res.json(err);
+        }
+        res.json(result);
+    })
+
+});
+
+router.get('/AccomplishmentByObjective', function (req, res) {
+    var objID = parseInt(req.query.objectiveID);
+    AccompList.findAccompByObjective(objID, function(err, result){
+        if (err){
+            return res.json(err);
+        }
+        res.json(result);
+    })
+})
+
 
 // more routes for our API will happen here
 
