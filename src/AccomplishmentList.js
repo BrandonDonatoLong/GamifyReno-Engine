@@ -10,3 +10,28 @@ AccomplishmentList.prototype.addAccomplishment = function(accomplishment){
     accomplishment.accomplishmentID = this.list.length;
     this.list.push(accomplishment);
 }
+
+AccomplishmentList.prototype.findAccompByUser = function(Userid , callback){
+    var result = this.list.filter(function( obj ) {
+        return obj.userID === Userid;
+    });
+
+    if (result.length === 0){
+        return callback("Cannot Find Any Accomplishments for that user", null);
+    }
+
+    return callback(null, result);
+}
+
+AccomplishmentList.prototype.findAccompPyObjective = function(objectiveId, callback){
+    var result = this.list.filter(function( obj ) {
+        return obj.objectiveID === objectiveId;
+    });
+
+    if (result.length === 0){
+        return callback("Cannot Find Any Accomplishments for that user", null);
+    }
+
+    return callback(null, result);
+}
+
