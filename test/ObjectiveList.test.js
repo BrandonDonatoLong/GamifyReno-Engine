@@ -8,8 +8,10 @@ var ObjectiveList = require('../src/ObjectiveList');
 var Objective = require('../src/Objective');
 
 var testLocation = {lat:10.0250, long:10.4870};
-var testNearby = {lat:10.0260, long:10.4880};
-var NotNearby = {lat:10.0350, long:10.4880};
+var LatLongNearby = {lat:10.0260, long:10.4880};
+var NotLatNearby = {lat:10.0950, long:10.4880};
+var NotLongNearby = {lat:10.0260, long:10.9880};
+var NoneNearby = {lat:10.0950, long:10.9880};
 
 describe("Group of Test to test objectiveList", function() {
     it("CreateObjectiveList", function () {
@@ -28,4 +30,42 @@ describe("Group of Test to test objectiveList", function() {
         assert.equal(objList.list[0].description, "Description");
         assert.deepEqual(objList.list[0].location, testLocation);
     })
+});
+
+describe("objective GPS testing", function () {
+    it ("single location Nearby", function () {
+        var obj = new Objective("Title1", "Description", testLocation, 10);
+
+        var nearby = obj.isNearBy(LatLongNearby);
+        assert.ok(nearby);
+    });
+
+    it ("not Lat Nearby", function () {
+        var obj = new Objective("Title1", "Description", testLocation, 10);
+
+        var nearby = obj.isNearBy(NotLatNearby);
+        assert.ok(!nearby);
+    });
+
+    it ("not long Nearby", function () {
+        var obj = new Objective("Title1", "Description", testLocation, 10);
+
+        var nearby = obj.isNearBy(NotLongNearby);
+        assert.ok(!nearby);
+    });
+
+    it("get NearbyList", function(done){
+        var objList = new ObjectiveList();
+        var obj = new Objective("Title1", "Description", testLocation, 10);
+        var obj2 = new Objective("Title2", "Description2", NotLatNearby);
+        objList.addObjective(obj);
+        objList.addObjective(obj2);
+
+        objList.getNearbyObjectives(testLocation, function(err, result){
+            assert.ifError(err);
+            assert.equal(result.length, 1);
+            assert.deepEqual(result[0],obj);
+            done()
+        });
+    });
 });

@@ -1,6 +1,9 @@
 /**
  * Created by Brandon Donato-Long on 4/15/2017.
  */
+
+var GPSSensativity = 0.05;
+
 module.exports = Objective = function(title, description, locationObj, basePoint){
     this.id = null;
     this.title = title;
@@ -16,7 +19,15 @@ Objective.prototype.completeObjective = function(accompID, UserID){
     this.usersCompleted.push({AccomplishmentID: accompID, userID: UserID});
 };
 
-Objective.prototype.isNearBy = function(CurrentLocation){
-    return
+Objective.prototype.isNearBy = function(currentLocation){
+    var latDiff = Math.abs(this.location.lat - currentLocation.lat);
+    var longDiff = Math.abs(this.location.long - currentLocation.long);
+    if (latDiff < GPSSensativity && longDiff < GPSSensativity){
+        //nearby
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
