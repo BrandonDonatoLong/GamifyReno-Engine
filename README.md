@@ -7,6 +7,119 @@ the objective tie it to them.
 All of the bodies are encoded in x-www-form-urlencoded 
 
 ## Objectives
+### Get: Objectives
+
+Gets list of all Objectives, no filters
+
+/api/Objectives
+
+#### Return:
+    
+    [
+      {
+        "id": 0,
+        "title": "Complete a 24 hour Hack-a-thon",
+        "description": "Compete a hackathon. Might I Suggest NASA Space Apps on April 29-30, 2017.",
+        "basePoints": 1000,
+        "usersCompleted": [
+          {
+            "AccomplishmentID": 0,
+            "userID": "BrandonDonLong"
+          },
+          {
+            "AccomplishmentID": 1,
+            "userID": "user2"
+          }
+        ],
+        "completedBefore": false,
+        "location": {
+          "lat": 39.525451,
+          "long": -119.816723
+        }
+      },
+      {
+        "id": 1,
+        "title": "Complete a Second Hackathon",
+        "description": "Compete a hackathon. Might I Suggest NASA Space Apps on April 29-30, 2017.",
+        "basePoints": 1000,
+        "usersCompleted": [],
+        "completedBefore": false,
+        "location": {
+          "lat": 39.543308,
+          "long": -119.81569
+        }
+      }
+    ]
+
+### Get: ObjectiveById
+    
+/api/ObjectiveById?id=0
+
+#### Return:
+    
+    {
+      "id": 0,
+      "title": "Complete a 24 hour Hack-a-thon",
+      "description": "Compete a hackathon. Might I Suggest NASA Space Apps on April 29-30, 2017.",
+      "basePoints": 1000,
+      "usersCompleted": [
+        {
+          "AccomplishmentID": 0,
+          "userID": "BrandonDonLong"
+        },
+        {
+          "AccomplishmentID": 1,
+          "userID": "user2"
+        }
+      ],
+      "completedBefore": false,
+      "location": {
+        "lat": 39.525451,
+        "long": -119.816723
+      }
+    }
+### Get: ObjectiveByLocation
+   
+/api/ObjectiveByLocation?lat=39.543308&long=-119.81569
+
+#### Return:
+
+    [
+      {
+        "id": 0,
+        "title": "Complete a 24 hour Hack-a-thon",
+        "description": "Compete a hackathon. Might I Suggest NASA Space Apps on April 29-30, 2017.",
+        "basePoints": 1000,
+        "usersCompleted": [
+          {
+            "AccomplishmentID": 0,
+            "userID": "BrandonDonLong"
+          },
+          {
+            "AccomplishmentID": 1,
+            "userID": "user2"
+          }
+        ],
+        "completedBefore": false,
+        "location": {
+          "lat": 39.525451,
+          "long": -119.816723
+        }
+      },
+      {
+        "id": 1,
+        "title": "Complete a Second Hackathon",
+        "description": "Compete a hackathon. Might I Suggest NASA Space Apps on April 29-30, 2017.",
+        "basePoints": 1000,
+        "usersCompleted": [],
+        "completedBefore": false,
+        "location": {
+          "lat": 39.543308,
+          "long": -119.81569
+        }
+      }
+    ]
+    
 ### Post: PostObjective
 
 /api/PostObjective
@@ -80,76 +193,28 @@ All of the bodies are encoded in x-www-form-urlencoded
         "userRating": 1010
       }
     }
-
-### Get: ObjectiveById
     
-/api/ObjectiveById?id=0
+## Users
+
+### Get: Users
+
+/api/Users
 
 #### Return:
-    
-    {
-      "id": 0,
-      "title": "Complete a 24 hour Hack-a-thon",
-      "description": "Compete a hackathon. Might I Suggest NASA Space Apps on April 29-30, 2017.",
-      "basePoints": 1000,
-      "usersCompleted": [
-        {
-          "AccomplishmentID": 0,
-          "userID": "BrandonDonLong"
-        },
-        {
-          "AccomplishmentID": 1,
-          "userID": "user2"
-        }
-      ],
-      "completedBefore": false,
-      "location": {
-        "lat": 39.525451,
-        "long": -119.816723
+
+    [
+      {
+        "userID": "BrandonDonLong",
+        "password": "Abc123",
+        "teamID": "Goons",
+        "userRating": 1035,
+        "userPicture": "http://i.imgur.com/g1oNYop.jpg"
+      },
+      {
+        "userID": "user2",
+        "password": "password",
+        "teamID": null,
+        "userRating": 1010
       }
-    }
-
-### Post: Accomplishment
-    {
-        ObjectiveID: number
-        UserID: String
-        Proof: Object
-    }
-
-### Get: Accomplishment
-    {
-        AccomplishmentID: Number
-        ObjectiveID: Number
-        UserID: String
-        Rating: Number
-    }
-
-### Post: RateAccomplishment
-    {
-        AccomplishmentID: Number
-        Rating: 1-5
-        UserID: String
-    }
-
-### User 
-    {
-        UserID: String,
-        TeamID: String,
-        Password: String,
-        Accomplishments: [list of accomplishments by user for user profile]
-    }
+    ]
     
-### Team
-
-#### Post CreateTeam
-    {
-        TeamName: TeamName,
-        TeamCreator: UserID,
-        TeamMoto: String,
-        OpenToCreate: True | False
-    }
-    
-#### Get Teams
-    {
-        Team
-    }
