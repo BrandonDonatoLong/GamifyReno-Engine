@@ -299,7 +299,7 @@ optional
       }
     ]
     
-### Get: AccomplishmentByUser
+### Get: AccomplishmentByObjective
 
 /api/AccomplishmentByObjective?objectiveID=0
     
