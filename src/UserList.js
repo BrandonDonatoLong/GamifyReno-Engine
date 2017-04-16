@@ -13,3 +13,14 @@ UserList.prototype.addUser = function(user){
         this.list.push(user);
     }
 }
+
+UserList.prototype.getUserById = function (userId) {
+    if (this.list.map(function(e) { return e.userID; }).indexOf(userId) > -1){
+        var index = this.list.map(function(e) { return e.userID; }).indexOf(userId);
+        return this.list[index];
+    }
+    else
+    {
+        return {};
+    }
+}

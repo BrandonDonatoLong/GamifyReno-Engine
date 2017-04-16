@@ -12,15 +12,18 @@ var userList = new UserList();
 var AccompList = new AccomplishmentList();
 
 var objectiveList = new ObjectiveList();
-var testLocation = {lat:10.0250, long:10.4870};
-var obj = new Objective("Title1", "Description", testLocation, 10);
-objectiveList.addObjective(obj);
-var obj2 = new Objective("Title2", "Description", testLocation, 10);
-objectiveList.addObjective(obj2);
-var obj3 = new Objective("Title3", "Description", testLocation, 10);
-objectiveList.addObjective(obj3);
-var obj4 = new Objective("Title4", "Description", testLocation, 10);
-objectiveList.addObjective(obj4);
+
+var testLocation = {lat:39.543308, long:-119.815690};
+
+//Default stuff so there is at least one objective and user
+
+var TestObjective = new Objective("Complete a 24 hour Hack-a-thon", "Compete a hackathon. Might I Suggest NASA Space Apps on April 29-30, 2017.", {lat:39.525451,long:-119.816723},1000);
+objectiveList.addObjective(TestObjective);
+
+var TestUser = new User("BrandonDonLong", "Abc123");
+TestUser.setPicture("http://i.imgur.com/g1oNYop.jpg");
+TestUser.JoinTeam("Goons");
+userList.addUser(TestUser);
 
 // BASE SETUP
 // =============================================================================
@@ -44,6 +47,12 @@ var router = express.Router();              // get an instance of the express Ro
 router.get('/Users', function(req, res) {
     res.json(userList.list);
 });
+router.get('/UserById', function(req, res){
+    var userID = req.query.id;
+    var user = userList.getUserById(userID);
+    res.json(user);
+});
+
 router.post('/createUser', function(req, res){
    //userID, password (optional: photo, teamID)
     var user = new User(req.body.userID, req.body.password);
@@ -57,7 +66,7 @@ router.post('/createUser', function(req, res){
     }
     res.json(user);
 });
-router.get('/Objective', function(req, res) {
+router.get('/Objectives', function(req, res) {
     // Just gets a list of ALL Objectives
     res.json(objectiveList.list);
 });
@@ -102,16 +111,19 @@ router.post('/CompleteObjective', function (req, res) {
     // 1.) Creates an accomplishment and adds it to the list
     // 2.) Adds the accomplishmentID created in part 1 and assigns it with a user as a completed user
     // The passed in items are ObjectiveID as id, userId and optional is a proof string
+    var user = userList.getUserById(req.body.userId);
     var accomp = new Accomplishment(parseInt(req.body.id), req.body.userId);
     AccompList.addAccomplishment(accomp);
     var objective = objectiveList.list[parseInt(req.body.id)];
     objective.completeObjective(accomp.accomplishmentID, req.body.userId);
+    //increment the user points
+    user.userRating += objective.basePoints;
 
     if (req.body.proof){
         accomp.addProof(req.body.proof);
     }
 
-    res.json({accomplishment: accomp, objective: objective});
+    res.json({accomplishment: accomp, objective: objective, user:user});
 });
 
 router.post('/AddProof', function (req, res) {
@@ -125,6 +137,26 @@ router.post('/AddProof', function (req, res) {
         }
     }
     return res.json({});
+});
+
+router.post('/Rating', function (req, res) {
+    // id = Accomplishment ID
+    // userId = userID
+    // rating = Number of points to increment by
+    var accompId = parseInt(req.body.id)
+    var userID = req.body.userID;
+    var rating = parseInt(req.body.rating);
+
+    var accomplishment = AccompList.findAccompById(accompId);
+    if (accomplishment){
+        var increaseRating = accomplishment.incrementRating(userID, rating);
+        var user = userList.getUserById(accomplishment.userID);
+        if (user){
+            user.userRating += increaseRating;
+        }
+        return res.json({Accomplishment:accomplishment, user:user});
+    }
+    res.json({})
 })
 
 

@@ -20,6 +20,7 @@ Accomplishment.prototype.incrementRating = function(userID, points){
     if (userID !== this.userID && this.userRatings.map(function(e) { return e.user; }).indexOf(userID) < 0){
         this.userRatings.push({user:userID, rating:points});
         this.points += points;
+        return points;
     }
 };
 
@@ -28,7 +29,8 @@ Accomplishment.prototype.decrementRating = function(userID){
     {
         var index = this.userRatings.map(function(e) { return e.user; }).indexOf(userID)
         this.points -= this.userRatings[index].rating;
+        var subtractPoints = this.userRatings[index].rating;
         this.userRatings.splice(index, 1);
-        // array.splice(i, 1);
+        return subtractPoints;
     }
 };

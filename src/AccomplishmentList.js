@@ -9,6 +9,14 @@ module.exports = AccomplishmentList = function () {
 AccomplishmentList.prototype.addAccomplishment = function(accomplishment){
     accomplishment.accomplishmentID = this.list.length;
     this.list.push(accomplishment);
+};
+
+AccomplishmentList.prototype.findAccompById = function(id){
+    if (this.list[id]){
+        //id is a good accomplishment
+        return this.list[id];
+    }
+    return;
 }
 
 AccomplishmentList.prototype.findAccompByUser = function(Userid , callback){

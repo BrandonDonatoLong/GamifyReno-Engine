@@ -11,7 +11,7 @@ module.exports = User = function(userID, Password){
 
 User.prototype.setPicture = function(pictureURL){
     if (!this.userPicture){
-        userRating += 10;
+        this.userRating += 10;
     }
     this.userPicture = pictureURL;
 }
