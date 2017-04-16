@@ -1,14 +1,9 @@
 /**
- * Created by BNB on 4/15/2017.
+ * Created by Brandon Donato-Long on 4/15/2017.
  */
 var ObjectiveList = require('./src/ObjectiveList');
 var Objective = require('./src/Objective');
-// var objectiveList = new ObjectiveList.ObjectiveList();
-var objList = new ObjectiveList();
-objList.AddObjective(new Objective("Get An STD", "Go on have some fun and show some dirty people some love", 1000));
-objList.AddObjective(new Objective("Get An STD Test", "Go tell your doctor you love them"));
+var User = require('./src/User');
+var UserList = require('./src/UserList');
 
-for (var index = 0; index < objList.list.length; index++)
-{
-    console.log("objective", objList.list[index].Id, "data: ", objList.list[index]);
-}
+//moved all the stuff that was here to a test folder.
