@@ -1,0 +1,16 @@
+{
+  "name": "GamifyReno Engine",
+  "version": "0.0.1",
+  "description": "The backend engine built around REST API to get some stuff we need",
+  "author": "Brandon Donato-Long",
+  "private": false,
+  "license": "MIT",
+  "dependencies": {
+  },
+  "engines": {
+      "node": ">= 6.9.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

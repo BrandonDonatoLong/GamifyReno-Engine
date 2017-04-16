@@ -34,7 +34,7 @@ I am thinking a RESTFUL API
         Rating: Number
     }
 
-###Post: RateAccomplishment
+### Post: RateAccomplishment
     {
         AccomplishmentID: Number
         Rating: 1-5
@@ -49,9 +49,9 @@ I am thinking a RESTFUL API
         Accomplishments: [list of accomplishments by user for user profile]
     }
     
-###Team
+### Team
 
-####Post CreateTeam
+#### Post CreateTeam
     {
         TeamName: TeamName,
         TeamCreator: UserID,
@@ -59,7 +59,7 @@ I am thinking a RESTFUL API
         OpenToCreate: True | False
     }
     
-####Get Teams
+#### Get Teams
     {
         Team
     }
