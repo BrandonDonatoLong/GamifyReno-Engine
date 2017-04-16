@@ -42,7 +42,7 @@ router.get('/User', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });
 });
 router.get('/Objective', function(req, res) {
-    res.json(objectiveList.JSONList());
+    res.json(objectiveList.list);
 });
 
 // more routes for our API will happen here
