@@ -35,14 +35,17 @@ describe("test suite for accomplishments", function () {
             var accomp2 = new Accomplishment(1, "User2");
             accompList.addAccomplishment(accomp2);
 
+            //should succeed
             accompList.list[0].incrementRating("user2", 4);
             assert.equal(accompList.list[0].points, 4);
+            //should fail because the user is rating their own accomplishment
             accompList.list[0].incrementRating("brandonDonLong", 1);
             assert.equal(accompList.list[0].points, 4);
+            //Should fail because a user is rating again
             accompList.list[0].incrementRating("user2", 3);
             assert.equal(accompList.list[0].points, 4);
+            //should decrement because the user already had a rating
             accompList.list[0].decrementRating("user2");
-            assert.equal(accompList.list[0].points, 0)
-
+            assert.equal(accompList.list[0].points, 0);
         })
 })
