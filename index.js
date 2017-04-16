@@ -8,10 +8,20 @@ var UserList = require('./src/UserList');
 var Accomplishment = require('./src/Accomplishments');
 var AccomplishmentList = require('./src/AccomplishmentList');
 
+var objectiveList = new ObjectiveList();
+var testLocation = {lat:10.0250, long:10.4870};
+var obj = new Objective("Title1", "Description", testLocation, 10);
+objectiveList.addObjective(obj);
+var obj2 = new Objective("Title2", "Description", testLocation, 10);
+objectiveList.addObjective(obj2);
+var obj3 = new Objective("Title3", "Description", testLocation, 10);
+objectiveList.addObjective(obj3);
+var obj4 = new Objective("Title4", "Description", testLocation, 10);
+objectiveList.addObjective(obj4);
+
 // BASE SETUP
 // =============================================================================
 
-// call the packages we need
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
@@ -30,6 +40,9 @@ var router = express.Router();              // get an instance of the express Ro
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/User', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });
+});
+router.get('/Objective', function(req, res) {
+    res.json(objectiveList.JSONList());
 });
 
 // more routes for our API will happen here
