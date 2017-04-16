@@ -8,6 +8,8 @@ var UserList = require('./src/UserList');
 var Accomplishment = require('./src/Accomplishments');
 var AccomplishmentList = require('./src/AccomplishmentList');
 
+var AccompList = new AccomplishmentList();
+
 var objectiveList = new ObjectiveList();
 var testLocation = {lat:10.0250, long:10.4870};
 var obj = new Objective("Title1", "Description", testLocation, 10);
@@ -65,6 +67,31 @@ router.get('/ObjectiveById', function(req, res) {
         res.json({});
     }
 });
+
+router.post('/CompleteObjective', function (req, res) {
+    var accomp = new Accomplishment(parseInt(req.body.id), req.body.userId);
+    AccompList.addAccomplishment(accomp);
+    var objective = objectiveList.list[parseInt(req.body.id)];
+    objective.completeObjective(accomp.accomplishmentID, req.body.userId);
+
+    if (req.body.proof){
+        accomp.addProof(req.body.proof);
+    }
+
+    res.json({accomplishment: accomp, objective: objective});
+});
+
+router.post('/AddProof', function (req, res) {
+    if (req.body.proof){
+        var accomp = AccompList.list[parseInt(req.body.id)];
+        if (accomp) {
+            accomp.addProof(req.body.proof);
+            return res.json(accomp);
+        }
+
+    }
+    return res.json({});
+})
 
 
 // more routes for our API will happen here

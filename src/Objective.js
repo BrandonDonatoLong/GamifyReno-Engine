@@ -15,11 +15,11 @@ module.exports = Objective = function(title, description, locationObj, basePoint
     this.location = locationObj;
 };
 
-Objective.prototype.completeObjective = function(accompID, UserID){
+Objective.prototype.completeObjective = function(accompID, userID){
 
     var index = this.usersCompleted.map(function(e) { return e.userID; }).indexOf(userID);
     if (index === -1){
-        this.usersCompletd.push({AccomplishmentID: accompID, userID: UserID});
+        this.usersCompleted.push({AccomplishmentID: accompID, userID: userID});
     }
 };
 
