@@ -90,7 +90,7 @@ router.post('/PostObjective', function (req, res) {
     var title = req.body.title;
     var description = req.body.description;
     var latt = parseFloat(req.body.lat);
-    var lng = parseFloat(req.body.lat);
+    var lng = parseFloat(req.body.long);
     var basePoints = parseInt(req.body.points);
     var objective = new Objective(title, description,{lat:latt, long:lng}, basePoints);
     objectiveList.addObjective(objective);
