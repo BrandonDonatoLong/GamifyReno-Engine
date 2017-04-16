@@ -23,7 +23,7 @@ AccomplishmentList.prototype.findAccompByUser = function(Userid , callback){
     return callback(null, result);
 }
 
-AccomplishmentList.prototype.findAccompPyObjective = function(objectiveId, callback){
+AccomplishmentList.prototype.findAccompByObjective = function(objectiveId, callback){
     var result = this.list.filter(function( obj ) {
         return obj.objectiveID === objectiveId;
     });

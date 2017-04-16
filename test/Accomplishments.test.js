@@ -88,7 +88,7 @@ describe("test suite for accomplishments", function () {
         var accomp2 = new Accomplishment(0, "User2");
         accompList.addAccomplishment(accomp2);
 
-        accompList.findAccompPyObjective(0, function(err, result){
+        accompList.findAccompByObjective(0, function(err, result){
             assert.ifError(err);
             assert.equal(result.length, 2);
             done();
