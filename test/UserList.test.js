@@ -14,8 +14,8 @@ describe("userFunctionalTest", function(){
         usrList.addUser(new User("BDonLong", "ABC123"));
         usrList.addUser(new User("user3", "Testme"));
 
-        console.log("json users", JSON.stringify(usrList.list));
+        assert.equals('{"userID":"BDonLong","password":"ABC123","teamID":null,"userRating":10},{"userID":"user3","password":"Testme","teamID":null,"userRating":10}', JSON.stringify(usrList.list));
 
-        console.log(usrList.addUser(new User("BDonLong", "ABC123")));
+        assert.equals(usrList.addUser(new User("BDonLong", "ABC123")), "Error userName already exists");
     })
 });
