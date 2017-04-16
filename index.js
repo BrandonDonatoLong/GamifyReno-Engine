@@ -44,6 +44,28 @@ router.get('/User', function(req, res) {
 router.get('/Objective', function(req, res) {
     res.json(objectiveList.list);
 });
+router.get('/ObjectiveByLocation', function(req, res) {
+    var currentLocation = {lat:parseFloat(req.query.lat), long:parseFloat(req.query.long)};
+    objectiveList.getNearbyObjectives(currentLocation, function(err, result){
+        if (err)
+        {
+            res.json([]);
+        }
+        res.json(result);
+    });
+});
+
+router.get('/ObjectiveById', function(req, res) {
+    var id = parseInt(req.query.id);
+    var result = objectiveList.list[id];
+    if (result){
+        res.json(result);
+    }
+    else{
+        res.json({});
+    }
+});
+
 
 // more routes for our API will happen here
 
