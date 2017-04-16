@@ -25,4 +25,16 @@ ObjectiveList.prototype.getNearbyObjectives = function(currentLocation, callback
     }
 
     return callback(null, result);
+};
+
+ObjectiveList.prototype.FindObjectiveByUserCompleted = function(userid, callback){
+    var result = this.list.filter(function( obj ) {
+        return obj.userCompleted(userid);
+    });
+
+    if (result.length === 0){
+        return callback("User Hasn't Completed this objective", null);
+    }
+
+    return callback(null, result);
 }

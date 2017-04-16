@@ -16,7 +16,11 @@ module.exports = Objective = function(title, description, locationObj, basePoint
 };
 
 Objective.prototype.completeObjective = function(accompID, UserID){
-    this.usersCompleted.push({AccomplishmentID: accompID, userID: UserID});
+
+    var index = this.usersCompleted.map(function(e) { return e.userID; }).indexOf(userID);
+    if (index === -1){
+        this.usersCompletd.push({AccomplishmentID: accompID, userID: UserID});
+    }
 };
 
 Objective.prototype.isNearBy = function(currentLocation){
@@ -29,5 +33,17 @@ Objective.prototype.isNearBy = function(currentLocation){
     else{
         return false;
     }
-}
+};
+
+Objective.prototype.userCompleted = function(userID){
+    var index = this.usersCompleted.map(function(e) { return e.userID; }).indexOf(userID);
+
+    if ( index > -1){
+        //user was found having completed this task
+        return true;
+    }
+    else {
+        return false;
+    }
+};
 
