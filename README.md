@@ -1,10 +1,18 @@
 # GamifyReno-Engine
 Backend engine for GamifyReno project for the Reno Hackathon 2017
 
+Our team won Best Azure App because of our integration with the Azure backend for this project.
+
 Backend will be developed in stages. The first stage is to create a list of objectives and then when a user accomplishes
 the objective tie it to them.
 
+The next changes to expand this would be to replace the data structures or expand them to a database for more persistant storage. Over the 24 hour event I didn't work on this because of the time constraint. All data is only in memory and wiped when the service restarts.
+
 All of the bodies are encoded in x-www-form-urlencoded 
+
+This API right now exists at http://gamifyreno.azurewebsites.net/
+
+Feel free to test it out.
 
 ## Objectives
 ### Get: Objectives
