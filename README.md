@@ -10,9 +10,7 @@ The next changes to expand this would be to replace the data structures or expan
 
 All of the bodies are encoded in x-www-form-urlencoded 
 
-This API right now exists at http://gamifyreno.azurewebsites.net/
-
-Feel free to test it out.
+This API is not hosted anywhere at the moment
 
 ## Objectives
 ### Get: Objectives
